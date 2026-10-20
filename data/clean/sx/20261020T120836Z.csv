@@ -1,0 +1,5 @@
+situation_id,created,progress,severity,report_type,valid_from,valid_to,summary,description,affected_lines,affected_stops
+KOL:SituationNumber:aef0f2a2-5d46-4ecf-b7ba-19c3ad39889f,2026-10-20T00:00:00+02:00,open,severe,incident,2026-10-20T00:00:00+02:00,2026-10-20T15:15:00+02:00,Forsinket på grunn av tekniske problemer,,KOL:Line:8_1015,
+KOL:SituationNumber:8e4a9dae-5cb7-492c-9714-0be96349875b,2026-10-20T00:00:00+02:00,open,severe,incident,2026-10-20T00:00:00+02:00,2026-10-20T15:56:00+02:00,Forsinket fra forrige rute,,KOL:Line:8_1007,
+KOL:SituationNumber:d4024076-e4c5-429c-b331-6918638ff8aa,2026-10-20T00:00:00+02:00,open,severe,incident,2026-10-20T00:00:00+02:00,2026-10-20T15:15:00+02:00,Forsinket på grunn av tekniske problemer,,KOL:Line:8_1015,
+KOL:SituationNumber:79d49995-5bed-4659-a40f-46c026bdfd87,2026-10-20T00:00:00+02:00,open,severe,incident,2026-10-20T00:00:00+02:00,2026-10-20T14:46:00+02:00,Forsinket fra forrige rute,,KOL:Line:8_1007,
