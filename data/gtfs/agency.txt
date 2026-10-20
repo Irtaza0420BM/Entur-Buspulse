@@ -1,4 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone
-KOL:Authority:26,Norled AS,https://www.norled.no/ferje/,Europe/Oslo
-KOL:Authority:30,Fjord1 ASA,https://www.fjord1.no/,Europe/Oslo
-KOL:Authority:8,Kolumbus,https://www.kolumbus.no,Europe/Oslo
