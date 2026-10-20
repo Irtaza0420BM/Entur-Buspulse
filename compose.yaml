@@ -1,0 +1,25 @@
+# One container per collector, so each runs (and fails/restarts) independently.
+#   docker compose up -d --build              start all
+#   docker compose stop service_alerts        stop one
+#   docker compose logs -f vehicle_positions  follow one
+
+x-collector: &collector
+  build: .
+  image: buspulse-collectors
+  restart: unless-stopped
+  volumes:
+    - ./data:/data   # bronze: raw files
+    - ./logs:/logs   # one log file per collector
+
+services:
+  vehicle_positions:
+    <<: *collector
+    command: collectors.vehicle_positions
+
+  estimated_timetable:
+    <<: *collector
+    command: collectors.estimated_timetable
+
+  service_alerts:
+    <<: *collector
+    command: collectors.service_alerts
