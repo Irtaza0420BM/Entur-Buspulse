@@ -56,7 +56,6 @@ jobs:
     runs-on: self-hosted
     permissions:
       contents: read
-      packages: read
 
     steps:
       - name: Update code on the VM
@@ -66,14 +65,9 @@ jobs:
           git reset --hard origin/main
           echo "VM now at commit: $(git rev-parse --short HEAD)"
 
-      - name: Pull new image and restart (if using Docker Compose)
+      - name: Rebuild and restart containers
         run: |
           cd /home/ubuntu/buspulse
-          if [ -f docker-compose.yml ] || [ -f compose.yaml ]; then
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker compose pull
-            docker compose up -d
-            docker image prune -f
-          else
-            echo "No compose file found, skipping container restart"
-          fi
+          docker compose up -d --build
+          docker compose ps
+          docker image prune -f
