@@ -11,44 +11,18 @@ jobs:
     runs-on: self-hosted
     permissions:
       contents: read
-      packages: write
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
       - name: Check the Python code compiles
         run: |
           pip install -r requirements.txt
           python -m compileall -q common collectors
-
-      - name: Log in to GitHub Container Registry
-        if: github.event_name == 'push'
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Image tags
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=sha
-
-      - name: Build (and push on main)
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: ${{ github.event_name == 'push' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
     needs: build
@@ -56,7 +30,6 @@ jobs:
     runs-on: self-hosted
     permissions:
       contents: read
-
     steps:
       - name: Update code on the VM
         run: |
@@ -68,6 +41,7 @@ jobs:
       - name: Rebuild and restart containers
         run: |
           cd /home/ubuntu/buspulse
-          docker compose up -d --build
+          docker compose build estimated_timetable
+          docker compose up -d --no-build
           docker compose ps
           docker image prune -f
