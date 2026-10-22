@@ -1,7 +1,8 @@
-.git
+.git/
 .github
-data
-logs
-__pycache__
+data/
+logs/
+__pycache__/
 *.pyc
 .venv
+.env
