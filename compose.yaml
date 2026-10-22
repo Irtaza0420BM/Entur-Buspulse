@@ -23,3 +23,7 @@ services:
   service_alerts:
     <<: *collector
     command: collectors.service_alerts
+
+  static_timetable:
+    <<: *collector
+    command: collectors.static_timetable
