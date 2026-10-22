@@ -11,6 +11,7 @@ jobs:
     runs-on: self-hosted
     permissions:
       contents: read
+
     steps:
       - uses: actions/checkout@v4
 
@@ -30,6 +31,7 @@ jobs:
     runs-on: self-hosted
     permissions:
       contents: read
+
     steps:
       - name: Update code on the VM
         run: |
@@ -41,7 +43,7 @@ jobs:
       - name: Rebuild and restart containers
         run: |
           cd /home/ubuntu/buspulse
-          docker compose build estimated_timetable
+          docker compose build
           docker compose up -d --no-build
           docker compose ps
           docker image prune -f
